@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function check(str, bracketsConfig) {
+        // your solution
+        let stack = [];
+
+        for (sign of str) {
+            for (arr of bracketsConfig) {
+            if (sign == arr[0] && sign == arr[1] && sign == stack[stack.length - 1]) { 
+                stack.pop();
+            } else 
+            if (sign == arr[0]) {
+                stack.push(sign);
+            } else
+            if (sign == arr[1] && stack[stack.length - 1] == arr[0]) {
+                stack.pop();
+            } else if (sign == arr[1] && stack[stack.length - 1] != arr[0]) {stack.push(sign);}
+            }         
+        }        
+        
+        console.log(stack);
+        
+        if (stack.length == 0) {
+            return true;
+        } else {
+            return false;
+        }
+        }
+        console.log(check('()', [['(', ')']])); //true
+        console.log(check('((()))()', [['(', ')']]));//true
+        console.log(check('([{}])', [['(', ')'], ['[', ']'], ['{', '}']]));//true
+        console.log(check('[(])', [['(', ')'], ['[', ']']]));//false
+        console.log(check('|()|', [['(', ')'], ['|', '|']]));//true
+        console.log(check('|(|)', [['(', ')'], ['|', '|']]));//false
+        console.log(check('|1||1|', [['1', '1'], ['|', '|']])); //true
+        console.log(check('([[[[(({{{}}}(([](((((((())))||||||))))[[{{|{{}}|}}[[[[]]]]{{{{{}}}}}]]))))]]]]))()', [['(', ')'], ['[', ']'], ['{', '}'], ['|', '|']]));  //false
+    </script>
+</body>
+</html>
